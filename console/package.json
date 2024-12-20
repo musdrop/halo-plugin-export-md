@@ -23,6 +23,7 @@
     "@iconify/json": "^2.2.165",
     "@rushstack/eslint-patch": "^1.6.1",
     "@types/jsdom": "^20.0.1",
+    "@types/lodash.clonedeep": "^4.5.9",
     "@types/node": "^16.18.69",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitejs/plugin-vue-jsx": "^2.1.1",

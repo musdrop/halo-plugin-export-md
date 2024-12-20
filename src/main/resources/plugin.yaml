@@ -7,7 +7,7 @@ spec:
   enabled: true
   requires: ">=2.12.0"
   author:
-    name: Lyn4ever
+    name: musdrop
     website: https://jhacker.cn
   logo: https://img.jhacker.cn/img/export2doc.png
   # 'homepage' usually links to the GitHub repository of the plugin

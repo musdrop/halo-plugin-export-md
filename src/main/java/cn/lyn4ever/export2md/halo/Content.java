@@ -11,5 +11,4 @@ public class Content  {
     private String raw;
     private String content;
     private String rawType;
-
 }

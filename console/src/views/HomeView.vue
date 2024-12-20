@@ -53,13 +53,13 @@ const handleCreate = () => {
           :route="{ name: 'export2doc', query: { tab: 'import4doc' } }"
         >
           <template #icon>
-            <IconArrowUpCircleLine class="h-full w-full" />
+            <IconArrowDownCircleLine class="h-full w-full" />
           </template>
           导入文章
         </VButton>
         <VButton type="secondary" @click="handleCreate">
           <template #icon>
-            <IconArrowDownCircleLine class="h-full w-full" />
+            <IconArrowUpCircleLine class="h-full w-full" />
           </template>
           导出文章
         </VButton>

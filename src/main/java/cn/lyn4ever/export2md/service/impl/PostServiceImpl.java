@@ -2,6 +2,7 @@ package cn.lyn4ever.export2md.service.impl;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.json.JSONUtil;
+import cn.lyn4ever.export2md.halo.ArticalAttras;
 import cn.lyn4ever.export2md.halo.Content;
 import cn.lyn4ever.export2md.halo.ContentRequest;
 import cn.lyn4ever.export2md.halo.ContentWrapper;
@@ -15,8 +16,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
+import cn.lyn4ever.export2md.util.ArticalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.markdown4j.Markdown4jProcessor;
@@ -26,6 +29,8 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 import run.halo.app.core.extension.content.Post;
+import run.halo.app.core.extension.content.Tag;
+import run.halo.app.core.extension.content.Category;
 import run.halo.app.extension.Metadata;
 import run.halo.app.extension.ReactiveExtensionClient;
 import run.halo.app.extension.Ref;
@@ -205,14 +210,18 @@ public class PostServiceImpl extends AbstractContentService implements PostServi
             throw new RuntimeException(e);
         }
 
+        //从文件中获取文章的属性，并将属性的内容从文章中移除
+        ArticalAttras attrs = ArticalUtil.getAttributes(reader);
+
         StringJoiner sj = new StringJoiner("\n");
         reader.lines().forEach(sj::add);
 
-        String title = file.getName().split(".md")[0];
+        String title = attrs.getTitle();
 
         Post post = new Post();
 
         Post.PostSpec postSpec = new Post.PostSpec();
+        //设置文章的标题
         postSpec.setTitle(title);
         postSpec.setSlug(UUID.fastUUID().toString(false));
         postSpec.setAllowComment(true);
@@ -225,6 +234,16 @@ public class PostServiceImpl extends AbstractContentService implements PostServi
         postSpec.setVisible(Post.VisibleEnum.PUBLIC);
         postSpec.setPublish(false);
         postSpec.setPinned(false);
+
+        //设置标签
+        createTags(attrs.getTags(),postSpec);
+
+        //创建一个元素的list来设置类别（先查询是否存在该类别，否则创建）
+
+        List<String> categories = List.of(attrs.getCategories());
+        postSpec.setCategories(categories);
+        //设置文章的创建时间
+        postSpec.setPublishTime(attrs.getDate().toInstant());
 
 
         Post.PostStatus postStatus = new Post.PostStatus();
@@ -250,5 +269,45 @@ public class PostServiceImpl extends AbstractContentService implements PostServi
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void createTags(List<String> tags, Post.PostSpec postSpec) {
+        client.list(Tag.class, null, null)
+            .collectList()
+            .subscribe(tagList -> {
+                String meta_name ="";
+                List<String> mns = new java.util.ArrayList<>(List.of());
+                List<Tag> newtags = new java.util.ArrayList<>(List.of());
+                for (String tag : tags) {
+                    boolean isExist = false;
+                    for (Tag t : tagList) {
+                        if (t.getSpec().getDisplayName().equals(tag)) {
+                            isExist = true;
+                            meta_name = t.getMetadata().getName();
+                            break;
+                        }
+                    }
+                    if (!isExist) {
+                        Tag newTag = new Tag();
+                        Tag.TagSpec spec = new Tag.TagSpec();
+                        Metadata metadata = new Metadata();
+                        //设置标签的属性
+                        spec.setDisplayName(tag);
+                        spec.setSlug(UUID.fastUUID().toString(false));
+                        spec.setColor("#ffffff");
+                        spec.setCover(null);
+                        //设置元数据
+                        meta_name = UUID.fastUUID().toString(false);
+                        metadata.setName(meta_name);
+                        newTag.setSpec(spec);
+                        newTag.setMetadata(metadata);
+                        newtags.add(newTag);
+                        //创建新的标签
+                        Mono.defer(() -> client.create(newTag)).subscribe();
+                    }
+                    mns.add(meta_name);
+                }
+                postSpec.setTags(mns);
+            });
     }
 }

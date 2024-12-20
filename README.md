@@ -1,4 +1,7 @@
 Halo 2.0 插件——文章导入导出插件
+## 前言
+本项目 fork 自 [Lyn4ever29/halo-plugin-export-md](https://github.com/Lyn4ever29/halo-plugin-export-md)，
+并在此基础上进行了一些修改，完善了部分功能，根据个人喜欢修改了一些界面细节
 
 ## 功能说明
 - 快速导出文章为markdown或者html文件
@@ -23,8 +26,10 @@ Halo 2.0 插件——文章导入导出插件
 - 与插件[ToolBench](https://www.halo.run/store/apps/app-SsYlH)一起使用时存在不兼容的问题，导致文章无法查看。
 - 如果您有任何问题或者好的建议，请提issue给我。
 
+## 本仓库更新日志
 
-## 更新日志
+
+## 原仓库更新日志
 - v1.2.3 优化导入导出的 UI。（来自[@ruibaby](https://github.com/ruibaby)的PR）
   - 支持显示空状态，引导用户导出文章。
   - 支持导出/删除记录之后自动更新列表数据，不再需要手动刷新页面。
