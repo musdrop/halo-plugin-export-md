@@ -20,8 +20,11 @@ Halo 2.0 插件——文章导入导出插件
 
 
 ## 安装
-- 下载[Release]()版本，直接安装即可
-- 下载链接
+- 从[Release](https://github.com/musdrop/halo-plugin-export-md/releases)下载所需版本jar包本地安装
+- 远程下载，下载链接
+```
+https://github.com/musdrop/halo-plugin-export-md/releases/download/V1.3.0/halo-plugin-export2doc-1.2.3.jar
+```
 
 ## 说明
 - 与插件[ToolBench](https://www.halo.run/store/apps/app-SsYlH)一起使用时存在不兼容的问题，导致文章无法查看。
