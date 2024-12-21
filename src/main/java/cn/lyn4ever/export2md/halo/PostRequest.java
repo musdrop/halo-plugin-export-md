@@ -6,7 +6,7 @@ import run.halo.app.extension.Ref;
 
 /**
  * Post and content data for creating and updating post.
- *
+ * @description 用于创建和更新文章的文章和内容数据
  * @author guqing
  * @since 2.0.0
  */

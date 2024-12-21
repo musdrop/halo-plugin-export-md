@@ -1,33 +1,65 @@
 Halo 2.0 插件——文章导入导出插件
 ## 前言
 本项目 fork 自 [Lyn4ever29/halo-plugin-export-md](https://github.com/Lyn4ever29/halo-plugin-export-md)，
-并在此基础上进行了一些修改，完善了部分功能，根据个人喜欢修改了一些界面细节
+并在此基础上进行了一些修改，完善了部分功能，修改了一些界面细节
 
 ## 功能说明
 - 快速导出文章为markdown或者html文件
 - 导出后打包下载
 - 提供文章导入功能，支持导入markdown文件
+- 支持导入的markdown文件包含属性，目前仅支持标题、日期、分类、标签
 
-## 预览
-- 文章列表导出功能
+## 功能预览
+- 文章列表界面的单文章导出
 
 ![https://github.com/Lyn4ever29/halo-plugin-export-md/assets/25952589/dd247afe-76f0-402f-9f3c-68b265d7b8ab](https://github.com/Lyn4ever29/halo-plugin-export-md/assets/25952589/dd247afe-76f0-402f-9f3c-68b265d7b8ab)
 
-- 导出列表
+- 工具栏本工具界面的批量导出
 
 ![导出列表](https://github.com/Lyn4ever29/halo-plugin-export-md/assets/25952589/2404ae3c-582b-4f5e-b9b6-96f7b029af69)
 
 
 ## 安装
-- 下载[Release](https://github.com/Lyn4ever29/halo-plugin-export-md/releases)版本，直接安装即可
-- 在Halo应用市场，支持一键安装[文章导入导出](https://www.halo.run/store/apps/app-vWbpZ)
+- 下载[Release]()版本，直接安装即可
+- 下载链接
 
 ## 说明
 - 与插件[ToolBench](https://www.halo.run/store/apps/app-SsYlH)一起使用时存在不兼容的问题，导致文章无法查看。
 - 如果您有任何问题或者好的建议，请提issue给我。
 
 ## 本仓库更新日志
+- v1.3.0
+  - 完善了对导入文章的属性的解析，支持自动创建未定义的标签和分类
+  - 支持无属性文章，支持跳过暂未实现解析的属性
+  - 目前解析默认开启
+  - 支持多种categories格式：
+  ```yaml
+  categories: 开发
+  ```
+  ```yaml
+  categories: 开发
+  - 日志
+  ```
+  ```yaml
+  categories: 
+  - 开发
+  - 日志
+  ```
 
+- v1.2.3 
+  - 优化导入导出的图标错误，箭头向上导出，向下导入
+  - 添加对导入的文章的属性的解析与加载，默认启用暂无开关，仅支持title，data，categories，tags，格式如下
+  ```yaml
+  ---
+  title: 我的halo插件
+  date: 2023-04-22
+  categories: 开发
+  tags:
+  - spring
+  - vue
+  - 插件
+  ---
+  ```
 
 ## 原仓库更新日志
 - v1.2.3 优化导入导出的 UI。（来自[@ruibaby](https://github.com/ruibaby)的PR）
@@ -73,6 +105,7 @@ Halo 2.0 插件——文章导入导出插件
 - [x] 导出为Markdown、HTML文件
 - [x] 导出的Markdown文件包含属性
 - [x] Markdown文章导入
+- [x] 导入Markdown时支持基本的属性解析
 - [ ] 导入Markdown时支持属性自定义
 - [ ] 根据筛选条件（日期、分类、标签等）导出
 - [ ] 导出适配其他平台的目录格式，如VuePress、Hexo等

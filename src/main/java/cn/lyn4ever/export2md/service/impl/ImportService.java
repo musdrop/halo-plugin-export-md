@@ -3,7 +3,6 @@ package cn.lyn4ever.export2md.service.impl;
 import cn.hutool.core.lang.UUID;
 import cn.lyn4ever.export2md.halo.PostRequest;
 import cn.lyn4ever.export2md.schema.ImportLogSchema;
-import cn.lyn4ever.export2md.service.ImportService;
 import cn.lyn4ever.export2md.service.PostService;
 import java.io.File;
 import java.security.Principal;
@@ -24,7 +23,7 @@ import run.halo.app.extension.ReactiveExtensionClient;
  */
 @Service
 @RequiredArgsConstructor
-public class ImportServiceV2 implements ImportService {
+public class ImportService implements cn.lyn4ever.export2md.service.ImportService {
     private final PostService postService;
     private final ReactiveExtensionClient client;
 
@@ -45,7 +44,6 @@ public class ImportServiceV2 implements ImportService {
                 Post post = postRequest.getPost();
                 // post.getStatus().setContributors(List.of(owner));
 
-                // https://jhacker.cn/apis/api.console.halo.run/v1alpha1/posts
                 return postService.draftPost(postRequest).doOnSuccess(re->{
 
                     ImportLogSchema schema = new ImportLogSchema();

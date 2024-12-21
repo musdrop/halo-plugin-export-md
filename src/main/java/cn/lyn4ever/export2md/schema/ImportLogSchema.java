@@ -14,6 +14,7 @@ import java.util.Date;
  * @author Lyn4ever29
  * @url <a href="https://jhacker.cn">...</a>
  * @date 2023/11/1
+ * @description 导入日志的自定义模型
  */
 @Data
 @ToString

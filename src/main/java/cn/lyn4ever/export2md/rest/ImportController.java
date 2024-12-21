@@ -31,8 +31,6 @@ import run.halo.app.plugin.ApiVersion;
 @RestController
 @Slf4j
 public class ImportController {
-// /apis/api.plugin.halo.run/v1alpha1/plugins/export2doc/doImport/**
-
 
     @Autowired
     private ImportService importService;
@@ -51,11 +49,7 @@ public class ImportController {
     public Flux<Post> importPost1(@CookieValue("XSRF-TOKEN") String token,
         @CookieValue("SESSION") String session,
         @RequestPart("file") final Flux<FilePart> filePartFlux) {
-
         //保存文件
-        //保存文件
-
-
         return filePartFlux.flatMap(filePart -> {
             File file =
                 new File(FileUtil.getDocFile(FileUtil.DirPath.IMPORT).toFile().getAbsolutePath()
@@ -73,9 +67,7 @@ public class ImportController {
         MediaType.APPLICATION_PROBLEM_JSON_VALUE,
         MediaType.MULTIPART_FORM_DATA_VALUE})
     public Flux<Post> importPost(@RequestPart("file") final Flux<FilePart> filePartFlux) {
-
         //保存文件
-
         return filePartFlux.publishOn(Schedulers.boundedElastic()).flatMap(filePart -> {
             File file =
                 new File(FileUtil.getDocFile(FileUtil.DirPath.IMPORT).toFile().getAbsolutePath()

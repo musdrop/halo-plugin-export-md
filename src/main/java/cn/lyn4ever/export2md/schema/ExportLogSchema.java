@@ -13,6 +13,7 @@ import run.halo.app.extension.GVK;
  * @author Lyn4ever29
  * @url <a href="https://jhacker.cn">...</a>
  * @date 2023/11/1
+ * @description 导出日志的自定义模型
  */
 @Data
 @ToString

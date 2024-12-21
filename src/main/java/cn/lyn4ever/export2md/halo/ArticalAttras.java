@@ -6,12 +6,17 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @Author musdrop
+ * @description 文章的属性
+ * @date 2024/12/20
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticalAttras {
     private String title;
-    private String categories;
+    private List<String> categories;
     private List<String> tags;
     private Date date;
 }
