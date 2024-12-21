@@ -23,7 +23,7 @@ Halo 2.0 插件——文章导入导出插件
 - 从[Release](https://github.com/musdrop/halo-plugin-export-md/releases)下载所需版本jar包本地安装
 - 远程下载，下载链接
 ```
-https://github.com/musdrop/halo-plugin-export-md/releases/download/V1.3.0/halo-plugin-export2doc-1.2.3.jar
+https://github.com/musdrop/halo-plugin-export-md/releases/download/V1.3.1/halo-plugin-export2doc-1.3.0.jar
 ```
 
 ## 说明
